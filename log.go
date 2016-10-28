@@ -23,3 +23,9 @@ func UseSyslog(progname string) error {
 	log.SetOutput(logwriter)
 	return nil
 }
+
+func UseSyslogOrDie(progname string) {
+	if err := UseSyslog(progname); err != nil {
+		log.Fatal("cannot use syslog")
+	}
+}
