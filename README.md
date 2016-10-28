@@ -80,6 +80,14 @@ count, err = bernini.IoWriteString(
 if err != nil {
     log.Panic("IoWriteString failed")
 }
+
+// Initialize the logger flags by cleaning up the format
+bernini.InitLogger()
+
+err = bernini.UseSyslog()
+if err != nil {
+        log.Panic("UseSyslog failed")
+}
 ```
 
 Make sure you set your `GOPATH` environment variable and then `go get`
