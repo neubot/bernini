@@ -53,9 +53,9 @@ func RandByteMaskingImproved(n int) []byte {
 const rand_ascii = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
 
 func RandAsciiRemainder(n int) []byte {
-    b := make([]byte, n)
-    for i := range b {
-        b[i] = rand_ascii[rand.Int63() % int64(len(rand_ascii))]
-    }
-    return b
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = rand_ascii[rand.Int63()%int64(len(rand_ascii))]
+	}
+	return b
 }

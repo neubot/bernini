@@ -9,8 +9,8 @@ package bernini
 
 import (
 	"bufio"
-	"net"
 	"io"
+	"net"
 	"time"
 )
 
@@ -69,7 +69,7 @@ func IoFlush(conn net.Conn, writer *bufio.Writer) error {
 }
 
 func IoWriteString(conn net.Conn, writer *bufio.Writer, data string) (
-                   int, error) {
+	int, error) {
 	count := 0
 	err := conn.SetWriteDeadline(time.Now().Add(IoTimeout))
 	if err != nil {
