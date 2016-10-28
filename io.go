@@ -14,11 +14,11 @@ import (
 	"time"
 )
 
-const kv_deadline = 10.0 * time.Second
+const IoTimeout = 10.0 * time.Second
 
 func IoReadFull(conn net.Conn, reader io.Reader, data []byte) (int, error) {
 	count := 0
-	err := conn.SetReadDeadline(time.Now().Add(kv_deadline))
+	err := conn.SetReadDeadline(time.Now().Add(IoTimeout))
 	if err != nil {
 		return count, err
 	}
@@ -31,7 +31,7 @@ func IoReadFull(conn net.Conn, reader io.Reader, data []byte) (int, error) {
 }
 
 func IoWriteByte(conn net.Conn, writer *bufio.Writer, data byte) error {
-	err := conn.SetWriteDeadline(time.Now().Add(kv_deadline))
+	err := conn.SetWriteDeadline(time.Now().Add(IoTimeout))
 	if err != nil {
 		return err
 	}
@@ -44,7 +44,7 @@ func IoWriteByte(conn net.Conn, writer *bufio.Writer, data byte) error {
 
 func IoWrite(conn net.Conn, writer io.Writer, data []byte) (int, error) {
 	count := 0
-	err := conn.SetWriteDeadline(time.Now().Add(kv_deadline))
+	err := conn.SetWriteDeadline(time.Now().Add(IoTimeout))
 	if err != nil {
 		return count, err
 	}
@@ -57,7 +57,7 @@ func IoWrite(conn net.Conn, writer io.Writer, data []byte) (int, error) {
 }
 
 func IoFlush(conn net.Conn, writer *bufio.Writer) error {
-	err := conn.SetWriteDeadline(time.Now().Add(kv_deadline))
+	err := conn.SetWriteDeadline(time.Now().Add(IoTimeout))
 	if err != nil {
 		return err
 	}
@@ -71,7 +71,7 @@ func IoFlush(conn net.Conn, writer *bufio.Writer) error {
 func IoWriteString(conn net.Conn, writer *bufio.Writer, data string) (
                    int, error) {
 	count := 0
-	err := conn.SetWriteDeadline(time.Now().Add(kv_deadline))
+	err := conn.SetWriteDeadline(time.Now().Add(IoTimeout))
 	if err != nil {
 		return count, err
 	}
