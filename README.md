@@ -17,10 +17,8 @@ var count int
 var data []byte
 var err error
 
-err = bernini.InitRng()
-if err != nil {
-    log.Panic("cannot init rng")
-}
+// Initialize the random number generator
+bernini.InitRng()
 
 // Get 128 random bytes composed of uppercase or lowercase letters
 data = bernini.RandByteMaskingImproved(128)

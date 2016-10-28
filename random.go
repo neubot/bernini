@@ -8,6 +8,7 @@ package bernini
 
 import (
 	"math/rand"
+	"time"
 )
 
 // The following is what is called "Masking Improved"
@@ -19,6 +20,12 @@ const (
 	letterIdxMask = 1<<letterIdxBits - 1 // All 1-bits, as many as letterIdxBits
 	letterIdxMax  = 63 / letterIdxBits   // # of letter indices fitting in 63 bits
 )
+
+func InitRng() {
+	// Make sure we seed the random number generator properly
+	//   see <http://stackoverflow.com/a/12321192>
+	rand.Seed(time.Now().UTC().UnixNano())
+}
 
 func RandByteMaskingImproved(n int) []byte {
 	b := make([]byte, n)
