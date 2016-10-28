@@ -84,10 +84,27 @@ if err != nil {
 // Initialize the logger flags by cleaning up the format
 bernini.InitLogger()
 
-err = bernini.UseSyslog()
+// Modify the logger to send messages to syslog
+err = bernini.UseSyslog("progname")
 if err != nil {
         log.Panic("UseSyslog failed")
 }
+
+// Same as above but call `log.Fatal()` in case of failure
+bernini.UseSyslogOrDie("progname")
+
+/*
+ * The `GetoptVersionAndHelp` function will handle the `--help` and
+ * `--version` command line flags for you.
+ */
+
+const usage = `usage: progname [--help]
+       progname [--version]`
+
+bernini.GetoptVersionAndHelp(
+        "0.1.2"  // Version number as string
+        usage    // Usage string
+)
 ```
 
 Make sure you set your `GOPATH` environment variable and then `go get`
