@@ -7,6 +7,7 @@ package bernini
 import (
 	"log"
 	"log/syslog"
+	"os"
 )
 
 func InitLogger() {
@@ -26,6 +27,7 @@ func UseSyslog(progname string) error {
 
 func UseSyslogOrDie(progname string) {
 	if err := UseSyslog(progname); err != nil {
-		log.Fatal("cannot use syslog")
+		log.Printf("cannot use syslog: %s", err)
+		os.Exit(1)
 	}
 }
