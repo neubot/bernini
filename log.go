@@ -14,9 +14,9 @@ func InitLogger() {
 }
 
 // See http://technosophos.com/2013/09/14/using-gos-built-logger-log-syslog.html
-func UseSyslog() error {
+func UseSyslog(progname string) error {
 	log.Print("redirecting logs to the system logger")
-	logwriter, err := syslog.New(syslog.LOG_NOTICE, "baudelaire")
+	logwriter, err := syslog.New(syslog.LOG_NOTICE, progname)
 	if err != nil {
 		return err
 	}
