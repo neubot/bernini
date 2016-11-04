@@ -9,6 +9,7 @@ package bernini
 
 import (
 	"bufio"
+	"errors"
 	"io"
 	"net"
 	"time"
@@ -81,4 +82,21 @@ func IoWriteString(conn net.Conn, writer *bufio.Writer, data string) (
 	}
 	err = conn.SetWriteDeadline(time.Time{})
 	return count, err
+}
+
+func IoAccept(listener net.Listener) (net.Conn, error) {
+	tcp_listener, okay := listener.(*net.TCPListener)
+	if !okay {
+		return nil, errors.New("Not a net.TCPListener")
+	}
+	err := tcp_listener.SetDeadline(time.Now().Add(IoTimeout))
+	if err != nil {
+		return nil, err
+	}
+	conn, err := tcp_listener.Accept()
+	if err != nil {
+		return nil, err
+	}
+	err = tcp_listener.SetDeadline(time.Time{})
+	return conn, err
 }
